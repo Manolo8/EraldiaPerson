@@ -1,0 +1,29 @@
+Lore:
+  - {inventoryItens} itens
+  - {enderchestItens} itens no enderchest
+  - nível {level}
+  - último uso {last_use}
+
+#Se alterar e não colocar outro personagem com o mesmo ID, os personagens que usam esse ID
+#(No banco de dados) não serão carregados...)
+#O INDEX é a posição na GUI em que o item vai ficar
+#A permissão será eraldiaperson.person.<id>
+Personagens:
+  1:
+    index: 1
+    name: 'QqCoisa'
+    display: '&aQqcoisa'
+    cost: free
+    usePermission: false
+  2:
+    index: 2
+    name: 'QqCoisa2'
+    display: '&aQqcoisa2'
+    cost: 10000
+    usePermission: false
+  3:
+    index: 3
+    name: 'QqCoisa3'
+    display: '&aQqcoisa3'
+    cost: 100000
+    usePermission: true
