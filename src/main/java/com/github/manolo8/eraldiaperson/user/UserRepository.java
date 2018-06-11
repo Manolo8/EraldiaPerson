@@ -55,7 +55,6 @@ public class UserRepository extends NamedRepository<User,
 
         dto.leastSigBits = uuid.getLeastSignificantBits();
         dto.mostSigBits = uuid.getMostSignificantBits();
-        dto.firstLogin = System.currentTimeMillis();
 
         user = create(dto);
 
@@ -73,7 +72,7 @@ public class UserRepository extends NamedRepository<User,
 
         private long mostSigBits;
         private long leastSigBits;
-        private long firstLogin;
+
     }
     //======================================================
     //=========================_DTO=========================
@@ -126,7 +125,7 @@ public class UserRepository extends NamedRepository<User,
 
         public User getIfMatch(UUID uuid) {
             for (User user : getCached()) {
-                if (user.match(uuid)) return user;
+                if (user.getUuid().equals(uuid)) return user;
             }
 
             return null;
@@ -156,12 +155,18 @@ public class UserRepository extends NamedRepository<User,
         public User fromDTO(UserDTO dto) throws SQLException {
             User entity = super.fromDTO(dto);
 
+            entity.setName(dto.name);
+            entity.setUuid(new UUID(dto.mostSigBits, dto.leastSigBits));
+
             return entity;
         }
 
         @Override
         public UserDTO toDTO(User entity) throws SQLException {
             UserDTO dto = super.toDTO(entity);
+
+            dto.mostSigBits = entity.getUuid().getMostSignificantBits();
+            dto.leastSigBits = entity.getUuid().getLeastSignificantBits();
 
             return dto;
         }

@@ -49,12 +49,12 @@ public class Person extends BaseEntity {
         this.lastLocation = lastLocation;
     }
 
-    public void saveItems(Player player) throws SQLException {
-        player.setExp(exp);
-        player.setHealth(health);
-        player.setSaturation(saturation);
-        player.setFoodLevel(food);
-        player.teleport(lastLocation);
+    public void save(Player player) throws SQLException {
+        exp = player.getExp();
+        food = player.getFoodLevel();
+        health = player.getHealth();
+        saturation = player.getSaturation();
+        lastLocation = player.getLocation();
 
         Inventory inventory = player.getInventory();
 
@@ -71,12 +71,12 @@ public class Person extends BaseEntity {
         player.getInventory().clear();
     }
 
-    public void loadItems(Player player) {
-        exp = player.getExp();
-        food = player.getFoodLevel();
-        health = player.getHealth();
-        saturation = player.getSaturation();
-        lastLocation = player.getLocation();
+    public void load(Player player) {
+        player.setExp(exp);
+        player.setHealth(health);
+        player.setSaturation(saturation);
+        player.setFoodLevel(food);
+        player.teleport(lastLocation);
 
         Inventory inventory = player.getInventory();
 
